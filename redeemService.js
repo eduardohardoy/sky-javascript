@@ -1,16 +1,19 @@
 const constants = require("./constants");
 
-function rewardsService({
+module.exports = function rewardsService({
   customerAccountNumber,
   portfolio,
   eligibilityService,
 }) {
   const data = { data: [] };
 
-  const customerRewards = (customerSubscription) =>
-    typeof constants.channelAssociatedRewards[customerSubscription] === "undefined"
-      ? []
-      : constants.channelAssociatedRewards[customerSubscription];
+  const customerRewards = (customerSubscription) => {
+    if (constants.channelAssociatedRewards[customerSubscription]) {
+      return constants.channelAssociatedRewards[customerSubscription];
+    } else {
+      return [];
+    }
+  };
 
   try {
     const eligibility = eligibilityService(customerAccountNumber);
@@ -31,6 +34,4 @@ function rewardsService({
 
     return data;
   }
-}
-
-module.exports = rewardsService;
+};

@@ -56,7 +56,7 @@ describe('redeemService', () => {
   });
 
 
-  it('Should throw a error for a Technical Failure', () => {
+  it('Should send error for a Technical Failure', () => {
     const params = {
       customerAccountNumber: 123456,
       portfolio: {
@@ -67,7 +67,7 @@ describe('redeemService', () => {
     expect(params.eligibilityService).toThrow(constants.TECHNICAL_FAILURE_EXCEPTION);
   });
 
-  it('Should throw a error for an Invalid Account Number', () => {
+  it('Should send error for an Invalid Account Number', () => {
     const params = {
       customerAccountNumber: 123456,
       portfolio: {
